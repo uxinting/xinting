@@ -36,6 +36,12 @@ function wuxinting() {
 			context.stroke();
 		},
 		
+		drawHardLine: function ( context, begin, end, gradient ) {
+			var times = Math.floor( methods.random( 1, 4 ) );
+			for ( var i = 0; i < times; i++ )
+				methods.drawLine( context, begin, end, gradient );
+		},
+		
 		random: function ( min, max ) {
 			return Math.random() * ( max - min ) + min;
 		},
@@ -91,12 +97,12 @@ function wuxinting() {
 			var begin = methods.randomPoint( canvas.width, canvas.height );
 			var end = methods.toPoint( 1, begin, methods.randomLen( Math.sqrt( Math.pow( canvas.width, 2) + Math.pow( canvas.height, 2 ) ) ) );
 			
-			var alpha = Math.random() * 0.5;
+			var alpha = Math.random() * 0.3;
 			var gradient = context.createLinearGradient(begin.x, begin.y, end.x, end.y);
-			gradient.addColorStop(0,"rgba(255, 255, 255, "+ ( 0.5-alpha ) +")");
+			gradient.addColorStop(0,"rgba(255, 255, 255, "+ ( 0.3-alpha ) +")");
 			gradient.addColorStop(1,"rgba(255, 255, 255, "+ ( 1-alpha ) +")");
 			
-			methods.drawLine( context, begin, end, gradient );
+			methods.drawHardLine( context, begin, end, gradient );
 			document.body.insertBefore( canvas, document.body.firstChild);
 			return canvas;
 		},
@@ -117,12 +123,12 @@ function wuxinting() {
 				y: begin.y + len
 			};
 			
-			var alpha = Math.random() * 0.5;
+			var alpha = Math.random() * 0.3;
 			var gradient = context.createLinearGradient(begin.x, begin.y, end.x, end.y);
-			gradient.addColorStop(0,"rgba(255, 255, 255, "+ ( 0.5-alpha ) +")");
+			gradient.addColorStop(0,"rgba(255, 255, 255, "+ ( 0.3-alpha ) +")");
 			gradient.addColorStop(1,"rgba(255, 255, 255, "+ ( 1-alpha ) +")");
 			
-			methods.drawLine( context, begin, end, gradient );
+			methods.drawHardLine( context, begin, end, gradient );
 			document.body.insertBefore( canvas, document.body.firstChild );
 			return canvas;
 		}
@@ -130,7 +136,7 @@ function wuxinting() {
 	
 	this.starsRain = function( time ) {
 		setInterval( function () {
-			var speed = Math.floor( methods.random( 3, 7 ) );
+			var speed = Math.floor( methods.random( 5, 10 ) );
 			methods.move( entity.star(), speed, speed );
 		}, time );
 	}
@@ -187,6 +193,7 @@ function tips() {
 			context.moveTo( begin.x, begin.y );
 			context.lineTo( end.x, end.y );
 			context.stroke();
+			context.closePath();
 		},
 		
 		move: function ( el ) {
