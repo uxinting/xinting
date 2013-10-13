@@ -149,36 +149,88 @@ function wuxinting() {
 }
 
 function tips() {
+	var width = window.innerWidth;
+	var height = window.innerHeight;
+	
 	var settings = {
-		height: 3,
-		top: 40,
-		left: 40,
-		range: 300,
-		background: '#000000',
-		forground: '#ffffff',
-		begin: { x: 0, y: 1 },
-		end: { x: 300, y: 1},
-		time: 2000,
-		step: 2
+		process: {
+			h: 3,
+			top: '40px',
+			left: '40px',
+			range: 300,
+			background: '#000000',
+			forground: '#ffffff',
+			begin: { x: 0, y: 1 },
+			end: { x: 300, y: 1},
+			time: 2000,
+			step: 2
+		},
+		
+		message: {
+			h: 20,
+			left: '200px',
+			top: '200px',
+			time: 2000,
+			background: '#000000',
+			forground: '#ffffff',
+			text: '提示',
+			font: '16px 微软雅黑',
+		}
 	}
 	
 	var entity = {
 		process: function ( opt ) {
 			if ( typeof opt !== 'undefine' ) {
 				for ( var item in opt ) {
-					settings[item] = opt[item];
+					settings.process[item] = opt[item];
 				}
 			}
 		
 			var canvas = document.createElement( 'canvas' );
-			canvas.width = settings.range;
-			canvas.height = settings.height;
+			canvas.width = settings.process.range;
+			canvas.height = settings.process.h;
 			canvas.style.position = 'fixed';
-			canvas.style.top = settings.top;
-			canvas.style.left = settings.left;
+			canvas.style.top = settings.process.top;
+			canvas.style.left = settings.process.left;
 			
 			var context = canvas.getContext('2d');
-			methods.drawLine( context, settings.begin, settings.end, settings.background );
+			methods.drawLine( context, settings.process.begin, settings.process.end, settings.process.background );
+			document.body.insertBefore( canvas, document.body.firstChild);
+			
+			return canvas;
+		},
+		
+		message: function ( opt ) {
+			if ( typeof opt !== 'undefine' ) {
+				for ( var item in opt ) {
+					settings.message[item] = opt[item];
+				}
+			}
+			
+			var canvas = document.createElement( 'canvas' );
+			settings.message.size = parseInt( settings.message.font );
+			
+			canvas.height = settings.message.h;
+			canvas.style.position = 'fixed';
+			canvas.style.top = settings.message.top;
+			canvas.style.left = settings.message.left;
+			canvas.style.opacity = 0;
+			
+			var context = canvas.getContext( '2d' );
+			canvas.width = settings.message.w = settings.message.size * ( settings.message.text.length + 4 );
+			canvas.height = settings.message.h = settings.message.size * 3;
+			canvas.style.left = ( width - settings.message.w ) / 2 + 'px';
+			
+			//background
+			context.fillStyle = settings.message.background;
+			context.fillRect( 0, 0, settings.message.w, settings.message.h );
+			
+			//text
+			context.fillStyle = settings.message.forground;
+			context.font = settings.message.font;
+			context.textBaseline = 'bottom';
+			context.fillText( settings.message.text, settings.message.size*2, settings.message.size * 2 );
+			
 			document.body.insertBefore( canvas, document.body.firstChild);
 			
 			return canvas;
@@ -209,11 +261,45 @@ function tips() {
 				settings.end.x = current;
 				methods.drawLine( context, settings.begin, settings.end, settings.forground );
 			}, settings.time * settings.step / settings.range);
+		},
+		
+		show: function ( el ) {
+			var opacity = 0.01;
+			
+			var id = setInterval( function () {
+				el.style.opacity = opacity;
+				opacity += 0.05;
+				
+				if ( el.style.opacity >= 1 ) {
+					setTimeout( function () {
+						methods.hide( el );
+					}, settings.message.time );
+					clearInterval( id );
+				}
+			}, 20);
+		},
+		
+		hide: function ( el ) {
+			var opacity = 1;
+			
+			var id = setInterval( function () {
+				el.style.opacity = opacity;
+				opacity -= 0.05;
+				
+				if ( el.style.opacity <= 0 ) {
+					el.remove();
+					clearInterval( id );
+				}
+			}, 20 );
 		}
 	}
 	
 	this.process = function ( opt ) {
 		methods.move( entity.process( opt ) );
+	}
+	
+	this.alert = function ( opt ) {
+		methods.show( entity.message( opt ) );
 	}
 }
 
@@ -228,5 +314,9 @@ var x = {
 	
 	process: function ( options ) {
 		new tips().process( options );
+	},
+	
+	alert: function ( options ) {
+		new tips().alert( options );
 	}
 }
