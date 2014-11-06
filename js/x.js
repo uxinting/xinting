@@ -89,6 +89,7 @@ function wuxinting() {
 			canvas.width = settings.star.area.w;
 			canvas.height = settings.star.area.h;
 			canvas.style.position = 'fixed';
+			canvas.style.zIndex = 999;
 			canvas.style.top = Math.floor( methods.random( settings.star.begin.y[0], settings.star.begin.y[1] ) )+'px';
 			canvas.style.left = Math.floor( methods.random( settings.star.begin.x[0], settings.star.begin.x[1] ) )+'px';
 			
@@ -112,6 +113,7 @@ function wuxinting() {
 			canvas.width = settings.drop.area.w;
 			canvas.height = settings.drop.area.h;
 			canvas.style.position = 'fixed';
+			canvas.style.zIndex = 999;
 			canvas.style.top = Math.floor( methods.random( settings.drop.begin.y[0], settings.drop.begin.y[1] ) )+'px';
 			canvas.style.left = Math.floor( methods.random( settings.drop.begin.x[0], settings.drop.begin.x[1] ) )+'px';
 			
@@ -174,7 +176,7 @@ function tips() {
 			background: '#000000',
 			forground: '#ffffff',
 			text: '提示',
-			font: '16px 微软雅黑',
+			font: '12px 微软雅黑',
 		}
 	}
 	
@@ -192,6 +194,7 @@ function tips() {
 			canvas.style.position = 'fixed';
 			canvas.style.top = settings.process.top;
 			canvas.style.left = settings.process.left;
+			canvas.style.zIndex = 999;
 			
 			var context = canvas.getContext('2d');
 			methods.drawLine( context, settings.process.begin, settings.process.end, settings.process.background );
@@ -215,6 +218,7 @@ function tips() {
 			canvas.style.top = settings.message.top;
 			canvas.style.left = settings.message.left;
 			canvas.style.opacity = 0;
+			canvas.style.zIndex = 999;
 			
 			var context = canvas.getContext( '2d' );
 			canvas.width = settings.message.w = settings.message.size * ( settings.message.text.length + 4 );
@@ -252,15 +256,15 @@ function tips() {
 			var context = el.getContext('2d');
 			var current = 0;
 			var id = setInterval( function () {
-				if ( current >= settings.range ) {
+				if ( current >= settings.process.range ) {
 					clearInterval( id );
 					return;
 				}
 				
-				current += settings.step;
-				settings.end.x = current;
-				methods.drawLine( context, settings.begin, settings.end, settings.forground );
-			}, settings.time * settings.step / settings.range);
+				current += settings.process.step;
+				settings.process.end.x = current;
+				methods.drawLine( context, settings.process.begin, settings.process.end, settings.process.forground );
+			}, settings.process.time * settings.process.step / settings.process.range);
 		},
 		
 		show: function ( el ) {
