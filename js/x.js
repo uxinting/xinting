@@ -1,4 +1,5 @@
 function wuxinting() {
+    "use strict";
 	var width = window.innerWidth;
 	var height = window.innerHeight;
 
@@ -26,7 +27,7 @@ function wuxinting() {
 				y: [ -200, 200 ]
 			}
 		}
-	}
+	};
 	
 	var methods = {
 		drawLine: function ( context, begin, end, gradient ) {
@@ -176,7 +177,7 @@ function tips() {
 			background: '#000000',
 			forground: '#ffffff',
 			text: '提示',
-			font: '12px 微软雅黑',
+			font: '14px 微软雅黑 Times New Roma',
 		}
 	}
 	
@@ -221,8 +222,8 @@ function tips() {
 			canvas.style.zIndex = 999;
 			
 			var context = canvas.getContext( '2d' );
-			canvas.width = settings.message.w = settings.message.size * ( settings.message.text.length + 4 );
-			canvas.height = settings.message.h = settings.message.size * 3;
+			canvas.width = settings.message.w = methods.extent( settings.message.text, settings.message.size );
+			canvas.height = settings.message.h = settings.message.size * 2;
 			canvas.style.left = ( width - settings.message.w ) / 2 + 'px';
 			
 			//background
@@ -233,7 +234,7 @@ function tips() {
 			context.fillStyle = settings.message.forground;
 			context.font = settings.message.font;
 			context.textBaseline = 'bottom';
-			context.fillText( settings.message.text, settings.message.size*2, settings.message.size * 2 );
+			context.fillText( settings.message.text, settings.message.w * 0.1, settings.message.size * 1.5 );
 			
 			document.body.insertBefore( canvas, document.body.firstChild);
 			
@@ -266,6 +267,14 @@ function tips() {
 				methods.drawLine( context, settings.process.begin, settings.process.end, settings.process.forground );
 			}, settings.process.time * settings.process.step / settings.process.range);
 		},
+        
+        extent: function ( text, size ) {
+            var el = document.createElement( 'div' );
+            el.setAttribute( 'style', 'position:absolute;font-size:' + size + 'px;visibility:hidden;' )
+            el.innerHTML = text;
+            document.body.appendChild( el )
+            return el.offsetWidth * 1.2
+        },
 		
 		show: function ( el ) {
 			var opacity = 0.01;
