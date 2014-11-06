@@ -7,49 +7,49 @@
 
 ### Stars Rain ###
     
-    White shooting stars streak across the background which should be dark with 45 degree towards left-bottom.
+White shooting stars streak across the background which should be dark with 45 degree towards left-bottom.
     
-        x.starsRain();
+    x.starsRain();
 	
 ### Rain ###
 	
-    Raining
+Raining
     
-		x.rain();
+    x.rain();
 		
 ### Progress Bar ###
 	
-    A white progress bar
+A white progress bar
     
-		x.process( options );
+	x.process( options );
         
-		default 'options' is { 
-			h: 3,
-			top: '40px',
-			left: '40px',
-			range: 300,
-			background: '#000000',
-			forground: '#ffffff',
-			begin: { x: 0, y: 1 },
-			end: { x: 300, y: 1},
-			time: 2000,
-			step: 2
-		} should be changed as you wish.
+	default 'options' is { 
+		h: 3,
+		top: '40px',
+		left: '40px',
+		range: 300,
+		background: '#000000',
+		forground: '#ffffff',
+		begin: { x: 0, y: 1 },
+		end: { x: 300, y: 1},
+		time: 2000,
+		step: 2
+	} should be changed as you wish.
 		
 ### Alert Label ###
 
-    A alert dialog
+A alert dialog
     
-		x.alert( options );
-		default 'options' is {
-			h: 20,
-			left: '200px',
-			top: '200px',
-			time: 2000,
-			background: '#000000',
-			forground: '#ffffff',
-			text: '提示'
-		} should be changed as you wish.
+	x.alert( options );
+	default 'options' is {
+		h: 20,
+		left: '200px',
+		top: '200px',
+		time: 2000,
+		background: '#000000',
+		forground: '#ffffff',
+		text: '提示'
+	} should be changed as you wish.
 
 ## Buttons GitHub-Like ##
 
