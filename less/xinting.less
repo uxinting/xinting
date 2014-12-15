@@ -1,0 +1,87 @@
+@background: #F0F0F0;
+@nav-background: gray;
+@minwidth: 700px;
+
+@text-color: rgb( 56, 56, 56 );
+
+body {
+    background: @background;
+    padding: 0;
+    margin: 0;
+}
+
+.container-fluid {
+    position: absolute;
+    min-width: @minwidth;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    
+    .col-md-2, .col-md-10 {
+        display: block;
+        height: 100%;
+        float: left;
+    }
+    
+    .col-md-2 {
+        width: 20%;
+        background: @nav-background;
+    }
+    
+    .col-md-10 {
+        width: 80%;
+    }
+}
+
+.protrait-frame {
+    display: block;
+    width: @protraitsize;
+    height: @protraitsize;
+    position: relative;
+    padding: 1px;
+    border-radius: @protraitsize / 2;
+    border: solid 1px @nav-background;
+    
+    .protrait-front,
+    .protrait-back {
+        width: 100%-1px;
+        height: 100%-1px;
+        position: absolute;
+        background-image: url(../img/cartoon.jpg);
+        background-size: @protraitsize @protraitsize;
+        border-radius: @protraitsize / 2;
+        background-repeat: no-repeat;
+        transition: @rotateperiod;
+    }
+    
+    .protrait-front {
+        transition-delay: @rotateperiod;
+        transition-property: transform;
+        transition-duration: @rotateperiod;
+    }
+    
+    .protrait-back {
+        background-image: url(../img/sign.png);
+        transform: rotateY(90deg);
+    }
+}
+
+.protrait-frame:hover {
+    cursor: pointer;
+    border: solid 1px #66afe9;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(102, 175, 233, 0.6);
+    outline: 0 none;
+    
+    .protrait-front {
+        transform: rotateY(90deg);
+        transition: @rotateperiod;
+    }
+    
+    .protrait-back {
+        transform: rotateY(0deg);
+        transition-delay: @rotateperiod;
+        transition-property: transform;
+        transition-duration: @rotateperiod;
+    }
+}

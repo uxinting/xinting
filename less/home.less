@@ -1,0 +1,108 @@
+@import "xinting.less";
+
+@protraitw: 100px;
+@protraith: @protraitw;
+@protraitsize: @protraitw;
+
+@rotateperiod: 0.362s;
+@transition-period: @rotateperiod;
+
+@nav-font-size: 20px;
+@nav-font-family: "宋体";
+
+@article-width-normal: 400px;
+@article-width-scroll: 10px;
+@article-color-scroll: blue;
+@article-font-size: 12px;
+@article-font-family: "微软雅黑";
+
+@article-font-color-h: rgb( 56, 56, 56 );
+@article-font-color-p: rgb( 96, 96, 96 );
+
+.mynav {
+    display: block;
+    
+    ul {
+        display: block;
+        padding: @protraith 0 0 0;
+        li {
+            display: block;
+            padding: 15px 0;
+            a {
+                margin: 0 auto;
+            }
+        }
+    }
+    
+    #articles {
+        .protrait-front {
+            background-image: url(../img/pencil.png);
+        }
+        .protrait-back {
+            background-image: url(../img/articles.png);
+        }
+    }
+    
+    #pictures {
+        .protrait-front {
+            background-image: url(../img/brush.png);
+        }
+        .protrait-back {
+            background-image: url(../img/pictures.png);
+        }
+    }
+}
+
+.list {
+    #articles-list {
+        display: block;
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        
+        font-size: 0;
+        white-space: nowrap;
+        overflow-x: scroll;
+        overflow-y: hidden;
+        
+        li {
+            display: inline-block;
+            position: relative;
+            width: @article-width-normal;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border-right: dotted 1px #888;
+            
+            .article {
+                display: block;
+                position: absolute;
+                padding: 0 30px;
+                height: 100%;
+                
+                font: @article-font-size @article-font-family;
+                white-space: normal;
+                
+                h1 {
+                    color:  @article-font-color-h;
+                }
+                
+                p {
+                    color:  @article-font-color-p;
+                    line-height: 20px;
+                }
+            }
+        }
+        
+        li.active {
+            .article {
+                font-size: @article-font-size + 3px;
+                p {
+                    line-height: 25px;
+                }
+            }
+            width: @article-width-normal * 1.5;
+            background: #F9F9F9;
+        }
+    }
+}
