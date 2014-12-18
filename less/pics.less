@@ -1,0 +1,159 @@
+@import "xinting.less";
+
+@nav-font-size: 20px;
+@nav-font-family: "宋体";
+
+@pic-width-normal: 500px;
+@pic-height-normal: @pic-width-normal / 1.5;
+
+@pic-view-width-normal: 60px;
+@pic-view-height-normal: @pic-view-width-normal;
+
+.mynav {
+    display: block;
+    
+    ul {
+        display: block;
+        padding: @protraith 0 0 0;
+        li {
+            display: block;
+            padding: 15px 0;
+            a {
+                margin: 0 auto;
+            }
+        }
+    }
+    
+    #articles {
+        .protrait-front {
+            background-image: url(../img/pencil.png);
+        }
+        .protrait-back {
+            background-image: url(../img/articles.png);
+        }
+    }
+    
+    #pictures {
+        .protrait-front {
+            background-image: url(../img/brush.png);
+        }
+        .protrait-back {
+            background-image: url(../img/pictures.png);
+        }
+    }
+}
+
+.list {
+    background: white;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    
+    #pics-list {
+        display: block;
+        margin: 0;
+        padding: 0;
+        
+        li {
+            display: block;
+            position: relative;
+            width: @pic-width-normal;
+            height: @pic-height-normal;
+            border: solid 1px rgb( 222, 222, 222 );
+            box-shadow: 0px 0px 1px rgb( 230, 230, 230 );
+            margin: 5px;
+            float: left;
+            transition: all @transition-period;
+            
+            .pic {
+                display: block;
+                position: relative;
+                width: 100%;
+                height: 100%;
+                overflow: hidden;
+                
+                @keyframes pic-shake {
+                    0%      {margin-top: 0px;}
+                    20%     {margin-top: 2px;}
+                    50%     {margin-top: 0px;}
+                    70%     {margin-top: -2px;}
+                    100%    {margin-top: 0px;}
+                }
+                
+                &:hover {
+                    img {
+                        animation: pic-shake @animation-period / 2;
+                        animation-iteration-count: 2;
+                    }
+                    div {
+                        background-image: url(../img/sunshine.jpg);
+                        background-position: -150px 0px;
+                        p {
+                            color: #334455;
+                        }
+                    }
+                    .button {
+                        background: white;
+                    }
+                }
+                
+                img {
+                    position: absolute;
+                    left: 0;
+                    height: 100%;
+                }
+                
+                div {
+                    position: absolute;
+                    display: block;
+                    width: 50%;
+                    height: 100%;
+                    right: 0;
+                    background: @background;
+                    
+                    p {
+                        display: block;
+                        height: 90%;
+                        width: 80%;
+                        margin: auto;
+                        margin-top: 10px;
+                        color: @text-color;
+                        font-size: 16px;
+                        font-family: "幼圆", "仿宋";
+                        letter-spacing: 2px;
+                        word-spacing: 2px;
+                        overflow: hidden;
+                    }
+                    
+                    .button {
+                        display: block;
+                        position: absolute;
+                        bottom: 10px;
+                        right: 10px;
+                        
+                        width: @pic-view-width-normal - 2;
+                        height: @pic-view-height-normal - 2;
+                        border-radius: @pic-view-width-normal / 2;
+                        border: 0;
+                        box-shadow: 0 0 2px #00AAAA;
+                        
+                        font-family: sans-serif;
+                        font-size: 18px;
+                        font-weight: lighter;
+                        color: @text-color;
+                        
+                        background: #00FDE9;
+                        transition: @transition-period;
+                        
+                        &:hover {
+                            cursor: pointer;
+                            border: solid 2px white;
+                            background: #00FEED;
+                            box-shadow: 0 0 3px #00AAAA;
+                            transition: @transition-period;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

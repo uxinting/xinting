@@ -1,6 +1,15 @@
 @background: #F0F0F0;
 @nav-background: gray;
 @minwidth: 700px;
+@minheight: 600px;
+
+@protraitw: 100px;
+@protraith: @protraitw;
+@protraitsize: @protraitw;
+
+@rotateperiod: 0.362s;
+@transition-period: @rotateperiod;
+@animation-period: @transition-period;
 
 @text-color: rgb( 56, 56, 56 );
 
@@ -13,10 +22,12 @@ body {
 .container-fluid {
     position: absolute;
     min-width: @minwidth;
+    //min-height: @minheight;
     width: 100%;
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow: hidden;
     
     .col-md-2, .col-md-10 {
         display: block;
@@ -84,4 +95,13 @@ body {
         transition-property: transform;
         transition-duration: @rotateperiod;
     }
+}
+
+.time {
+    color: @text-color;
+    font-family: Times New Roman;
+    font-style: italic;
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-shadow: -1px -1px 0 rgba(255,255,255,0.3);
 }
