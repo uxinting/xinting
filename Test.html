@@ -2,7 +2,7 @@
 <html>
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-	<title>漂流</title>
+	<title>Test</title>
     <!--<link rel="stylesheet" href="css/x.css" />-->
 	<link rel="stylesheet/less" type="text/less" rev="stylesheet/less" href="less/x.less" />
 	<script src="http://cdn.bootcss.com/less.js/1.7.0/less.min.js"></script>
@@ -10,12 +10,37 @@
         body {
             background: @background;
         }
+        
+        .bubble {
+            width: 100px;
+            height: 100px;
+            border: 1px solid #888;
+        }
+        
+        .border:before {
+            border-bottom: 7px solid #000;
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            content: "";
+            position: absolute;
+            display: inline-block;
+            top: 2px;
+            left: 16px;
+        }
+        .border:after {
+            border-bottom: 6px solid #fff;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            content: "";
+            position: absolute;
+            display: inline-block;
+            top: 3px;
+            left: 17px;
+        }
     </style>
 </head>
 <body>
-    <div id="divCom" style="font-size: 14px; position: absolute;"></div>
-    <canvas id="test"></canvas>
-    <a href="#" class="button">OK</a>
+    <div class="bubble border"></div>
     <script src="js/x.js"></script>
 <script>
 //x.starsRain();
